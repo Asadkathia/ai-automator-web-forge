@@ -1,6 +1,7 @@
 
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 
 interface CallToActionProps {
   title: string;
@@ -24,7 +25,7 @@ const CallToAction = ({
         <p className="text-lg text-gray-300 mb-8">{description}</p>
         <Link to={buttonLink}>
           <Button size="lg" className="bg-ai-blue hover:bg-ai-blue/90 text-white px-8 py-6 text-lg">
-            {buttonText}
+            {buttonText} <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
         </Link>
       </div>
