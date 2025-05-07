@@ -134,9 +134,9 @@ const Services = () => {
           <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
             Our intelligent chatbots automate customer service, sales, and marketing to help your business grow.
           </p>
-          <Link to="/contact">
+          <Link to="/onboarding">
             <Button size="lg" className="bg-ai-blue hover:bg-ai-blue/90 text-white px-8 py-6 text-lg">
-              Schedule a Demo
+              Get Started
             </Button>
           </Link>
         </div>
@@ -209,7 +209,7 @@ const Services = () => {
         title="Ready to implement AI automation?"
         description="Get started with NexusAI today and revolutionize your customer interactions."
         buttonText="Get Started"
-        buttonLink="/contact"
+        buttonLink="/onboarding"
       />
     </Layout>
   );

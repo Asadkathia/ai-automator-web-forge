@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LogIn } from "lucide-react";
 
 const Navigation = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -74,6 +74,12 @@ const Navigation = () => {
               Contact
             </Link>
             <Link to="/dashboard">
+              <Button variant="outline" className="border-ai-blue text-ai-blue hover:bg-ai-blue/10">
+                <LogIn className="mr-2 h-4 w-4" />
+                Sign In
+              </Button>
+            </Link>
+            <Link to="/dashboard">
               <Button className="ml-4 bg-ai-blue hover:bg-ai-blue/90">
                 Dashboard
               </Button>
@@ -132,6 +138,16 @@ const Navigation = () => {
               onClick={() => setMobileMenuOpen(false)}
             >
               Contact
+            </Link>
+            <Link
+              to="/dashboard"
+              className="w-full"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <Button variant="outline" className="w-full border-ai-blue text-ai-blue hover:bg-ai-blue/10">
+                <LogIn className="mr-2 h-4 w-4" />
+                Sign In
+              </Button>
             </Link>
             <Link
               to="/dashboard"

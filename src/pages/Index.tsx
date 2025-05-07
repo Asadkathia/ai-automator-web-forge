@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
@@ -64,7 +63,7 @@ const Home = () => {
                 Intelligent chatbots that boost customer satisfaction, drive sales, and deliver marketing results 24/7.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <Link to="/services">
+                <Link to="/onboarding">
                   <Button size="lg" className="bg-ai-blue hover:bg-ai-blue/90 text-white px-8 py-6 text-lg w-full sm:w-auto">
                     Get Started
                   </Button>
@@ -207,7 +206,7 @@ const Home = () => {
         title="Ready to Automate Your Business?"
         description="Get started with NexusAI today and transform your customer interactions."
         buttonText="Get Started"
-        buttonLink="/contact"
+        buttonLink="/onboarding"
       />
     </Layout>
   );
