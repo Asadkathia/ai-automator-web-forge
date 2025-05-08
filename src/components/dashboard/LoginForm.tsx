@@ -1,132 +1,109 @@
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
-import { Lock, Mail } from "lucide-react";
-
-interface LoginData {
-  email: string;
-  password: string;
-}
+import { toast } from "@/hooks/use-toast";
 
 const LoginForm = () => {
-  const { toast } = useToast();
-  const [isLoggingIn, setIsLoggingIn] = useState(false);
-  const [loginData, setLoginData] = useState<LoginData>({
-    email: "",
-    password: "",
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setLoginData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsLoggingIn(true);
-
-    // Simulate login API call
-    setTimeout(() => {
+    
+    if (!email || !password) {
       toast({
-        title: "Coming Soon",
-        description: "The dashboard functionality is under development.",
+        title: "Error",
+        description: "Please enter both email and password",
+        variant: "destructive",
       });
-      setIsLoggingIn(false);
-    }, 1500);
+      return;
+    }
+    
+    setIsLoading(true);
+    
+    try {
+      // Simulate authentication - In a real app, this would be an API call
+      setTimeout(() => {
+        // Mock successful login
+        toast({
+          title: "Success",
+          description: "You have successfully signed in to your account",
+        });
+        
+        // Redirect to user dashboard
+        navigate("/user-dashboard");
+      }, 1500);
+    } catch (error) {
+      toast({
+        title: "Sign in failed",
+        description: "Please check your credentials and try again",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white rounded-lg shadow-lg overflow-hidden reveal">
-      <div className="p-8">
-        <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold gradient-text">NexusAI Login</h2>
-          <p className="text-gray-600 mt-2">Access your dashboard</p>
-        </div>
-        
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium mb-2">
-              Email
-            </label>
-            <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-4 w-4" />
+    <div className="max-w-md mx-auto">
+      <Card className="shadow-lg">
+        <CardHeader>
+          <CardTitle className="text-2xl font-bold">Sign In</CardTitle>
+          <CardDescription>Access your NeuraFlow dashboard</CardDescription>
+        </CardHeader>
+        <form onSubmit={handleSubmit}>
+          <CardContent className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
-                name="email"
                 type="email"
-                placeholder="you@company.com"
-                className="pl-10"
-                value={loginData.email}
-                onChange={handleInputChange}
+                placeholder="your@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
-          </div>
-          
-          <div>
-            <label htmlFor="password" className="block text-sm font-medium mb-2">
-              Password
-            </label>
-            <div className="relative">
-              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-4 w-4" />
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <Label htmlFor="password">Password</Label>
+                <Button variant="link" className="p-0 h-auto text-ai-blue" type="button">
+                  Forgot password?
+                </Button>
+              </div>
               <Input
                 id="password"
-                name="password"
                 type="password"
                 placeholder="••••••••"
-                className="pl-10"
-                value={loginData.password}
-                onChange={handleInputChange}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </div>
-          </div>
-          
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input
-                id="remember-me"
-                name="remember-me"
-                type="checkbox"
-                className="h-4 w-4 text-ai-blue focus:ring-ai-blue border-gray-300 rounded"
-              />
-              <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
-                Remember me
-              </label>
-            </div>
-            <div className="text-sm">
-              <a href="#" className="font-medium text-ai-blue hover:text-ai-blue/80">
-                Forgot password?
+          </CardContent>
+          <CardFooter className="flex flex-col">
+            <Button 
+              className="w-full bg-ai-blue hover:bg-ai-blue/90" 
+              type="submit"
+              disabled={isLoading}
+            >
+              {isLoading ? "Signing in..." : "Sign In"}
+            </Button>
+            <div className="mt-4 text-center text-sm">
+              <span className="text-gray-500">Don't have an account? </span>
+              <a href="/onboarding" className="text-ai-blue hover:underline">
+                Create one
               </a>
             </div>
-          </div>
-          
-          <Button
-            type="submit"
-            className="w-full bg-ai-blue hover:bg-ai-blue/90"
-            disabled={isLoggingIn}
-          >
-            {isLoggingIn ? "Logging in..." : "Log in"}
-          </Button>
-          
-          <div className="text-center text-sm text-gray-600">
-            Don't have an account?{" "}
-            <a href="/contact" className="font-medium text-ai-blue hover:text-ai-blue/80">
-              Contact sales
-            </a>
-          </div>
+          </CardFooter>
         </form>
-      </div>
-      
-      <div className="px-8 py-5 bg-ai-light border-t border-gray-200 text-center">
-        <p className="text-xs text-gray-600">
-          This is a placeholder for the upcoming dashboard feature.
-          <br />
-          Current customers can contact support for access.
-        </p>
-      </div>
+      </Card>
     </div>
   );
 };
