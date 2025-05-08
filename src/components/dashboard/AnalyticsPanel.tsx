@@ -1,7 +1,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { BarChart, LineChart } from "@/components/ui/chart";
+import { LineChart, BarChart } from "@/components/ui/charts";
 
 const AnalyticsPanel = () => {
   // Mock data for the charts
@@ -50,20 +50,6 @@ const AnalyticsPanel = () => {
           <div className="h-[200px]">
             <LineChart 
               data={interactionsData}
-              options={{
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                  y: {
-                    beginAtZero: true,
-                  },
-                },
-                plugins: {
-                  legend: {
-                    display: false,
-                  },
-                },
-              }}
             />
           </div>
         </div>
@@ -73,15 +59,6 @@ const AnalyticsPanel = () => {
           <div className="h-[200px]">
             <BarChart 
               data={satisfactionData}
-              options={{
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                  legend: {
-                    display: false,
-                  },
-                },
-              }}
             />
           </div>
         </div>
