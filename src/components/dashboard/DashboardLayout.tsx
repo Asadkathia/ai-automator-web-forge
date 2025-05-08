@@ -128,7 +128,12 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
               variant="ghost" 
               size="icon" 
               className="md:hidden mr-2"
-              onClick={() => document.querySelector('[data-sidebar="trigger"]')?.click()}
+              onClick={() => {
+                const triggerElement = document.querySelector('[data-sidebar="trigger"]');
+                if (triggerElement instanceof HTMLElement) {
+                  triggerElement.click();
+                }
+              }}
             >
               <SidebarTrigger />
             </Button>
