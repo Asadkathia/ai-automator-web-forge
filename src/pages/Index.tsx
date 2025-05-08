@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
@@ -97,7 +98,7 @@ const Home = () => {
       <section className="py-20 bg-ai-light">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16 reveal">
-            <h2 className="text-3xl md:text-4xl font-bold text-ai-dark mb-4">Why Choose NexusAI</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-ai-dark mb-4">Why Choose NeuraFlow</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Our AI solutions drive efficiency, reduce costs, and deliver exceptional customer experiences around the clock.
             </p>
@@ -187,7 +188,7 @@ const Home = () => {
             </svg>
           </div>
           <blockquote className="text-2xl font-medium text-gray-700 mb-8">
-            "NexusAI's chatbots have revolutionized our customer service. We've seen a 45% increase in customer satisfaction and saved over $100,000 annually in support costs."
+            "NeuraFlow's chatbots have revolutionized our customer service. We've seen a 45% increase in customer satisfaction and saved over $100,000 annually in support costs."
           </blockquote>
           <div className="flex items-center justify-center">
             <div className="mr-4">
@@ -204,7 +205,7 @@ const Home = () => {
       {/* CTA Section */}
       <CallToAction 
         title="Ready to Automate Your Business?"
-        description="Get started with NexusAI today and transform your customer interactions."
+        description="Get started with NeuraFlow today and transform your customer interactions."
         buttonText="Get Started"
         buttonLink="/onboarding"
       />
