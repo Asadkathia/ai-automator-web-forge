@@ -1,9 +1,9 @@
 
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Bell, User, LogOut, Calendar, PlusCircle } from "lucide-react";
+import { Bell, User, LogOut, Calendar, PlusCircle, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { SidebarTrigger } from "@/components/ui/sidebar";
+import { useSidebar } from "@/components/ui/sidebar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,6 +20,7 @@ interface TopBarProps {
 
 const TopBar = ({ notificationCount }: TopBarProps) => {
   const navigate = useNavigate();
+  const { toggleSidebar, state } = useSidebar();
 
   const handleLogout = () => {
     toast({
@@ -43,14 +44,9 @@ const TopBar = ({ notificationCount }: TopBarProps) => {
           variant="ghost" 
           size="icon" 
           className="md:hidden mr-2"
-          onClick={() => {
-            const triggerElement = document.querySelector('[data-sidebar="trigger"]');
-            if (triggerElement instanceof HTMLElement) {
-              triggerElement.click();
-            }
-          }}
+          onClick={toggleSidebar}
         >
-          <SidebarTrigger />
+          <Menu className="h-5 w-5" />
         </Button>
         
         <Button 
@@ -111,6 +107,16 @@ const TopBar = ({ notificationCount }: TopBarProps) => {
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
+
+        {/* Mobile-only logout button */}
+        <Button 
+          variant="ghost" 
+          size="icon" 
+          className="md:hidden" 
+          onClick={handleLogout}
+        >
+          <LogOut className="h-5 w-5" />
+        </Button>
       </div>
     </header>
   );

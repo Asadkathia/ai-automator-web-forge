@@ -21,7 +21,7 @@ const UserDashboard = () => {
   };
 
   return (
-    <SidebarProvider>
+    <SidebarProvider defaultOpen={true}>
       <DashboardLayout>
         <div className="p-6 space-y-6">
           <WelcomeBanner userData={userData} />

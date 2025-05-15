@@ -7,7 +7,8 @@ import {
   BarChart, 
   Calendar, 
   Settings,
-  MessageSquare
+  MessageSquare,
+  LogOut
 } from "lucide-react";
 import { 
   Sidebar, 
@@ -17,16 +18,39 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
-  SidebarTrigger
+  SidebarTrigger,
+  useSidebar
 } from "@/components/ui/sidebar";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { toast } from "@/hooks/use-toast";
 
 const SidebarNav = () => {
+  const navigate = useNavigate();
+  const { state, toggleSidebar } = useSidebar();
+
+  const handleLogout = () => {
+    // In a real implementation, we would call supabase.auth.signOut() here
+    toast({
+      title: "Logged out successfully",
+      description: "You have been logged out of your account.",
+    });
+    navigate("/");
+  };
+
   return (
     <Sidebar>
       <SidebarHeader className="py-4 px-2">
         <div className="flex items-center justify-between px-2">
           <h2 className="text-2xl font-bold gradient-text">NeuraFlow</h2>
-          <SidebarTrigger />
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            className="md:block" 
+            onClick={toggleSidebar}
+          >
+            <SidebarTrigger />
+          </Button>
         </div>
       </SidebarHeader>
       <SidebarContent>
@@ -76,6 +100,12 @@ const SidebarNav = () => {
             <SidebarMenuButton tooltip="Support">
               <MessageSquare />
               <span>Chat with Us</span>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton tooltip="Logout" onClick={handleLogout}>
+              <LogOut />
+              <span>Logout</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

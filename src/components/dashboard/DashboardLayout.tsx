@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import SidebarNav from "./SidebarNav";
 import TopBar from "./TopBar";
+import { useSidebar } from "@/components/ui/sidebar";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -9,12 +10,13 @@ interface DashboardLayoutProps {
 
 const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   const [notificationCount] = useState(2);
+  const { state } = useSidebar();
 
   return (
     <div className="flex min-h-screen w-full bg-ai-light">
       <SidebarNav />
       
-      <div className="flex-1 flex flex-col">
+      <div className={`flex-1 flex flex-col transition-all duration-200 ${state === 'collapsed' ? 'md:ml-0' : 'md:ml-0'}`}>
         <TopBar notificationCount={notificationCount} />
         
         {/* Main Content */}
